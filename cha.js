@@ -1,41 +1,29 @@
-var st;
-var st1;
-document.getElementById('bt1').addEventListener('click', lloop);
-document.getElementById('bt3').addEventListener('click', rloop);
-document.getElementById('bt2').addEventListener('click',function(){
-	clearTimeout(st);
-	clearTimeout(st1);
+var float;
+document.getElementById("bt1").addEventListener('click', function () {
+    clearInterval(float);
+    float = setInterval(function () {
+      document.getElementById("tb2").value += document.getElementById("tb1").value.charAt(0);
+        document.getElementById("tb1").value = document.getElementById("tb1").value.substr(1);
+        if(document.getElementById("tb1").value.length == 0){
+                      clearInterval(float);
+        }
+
+    }, 1000)
 });
 
-function lloop()
-{
-	clearTimeout(st1);
-	var linp= document.querySelector('#tb1').value;
-	var rinp= document.querySelector('#tb2').value;
-	if(linp.length!=0){
-		rinp+= linp[0];
-	document.querySelector('#tb2').value= rinp;
-	linp= linp.slice(1);	
-	document.querySelector('#tb1').value= linp;
-	if (linp.length!=0){
-		st= setTimeout(lloop,1000);
-	}	
-}
-}
+document.getElementById("bt3").addEventListener('click', function () {
+    clearInterval(float);
+    float = setInterval(function () {
+        document.getElementById("tb1").value = document.getElementById("tb2").value.charAt(document.getElementById("tb2").value.length-1) + document.getElementById("tb1").value;
 
-function rloop()
-{
-	clearTimeout(st);
-	var linp= document.querySelector('#tb1').value;
-	var rinp= document.querySelector('#tb2').value;
-	if(rinp.length!=0){
-	linp = rinp[rinp.length-1]+linp;
-	document.querySelector('#tb1').value= linp;
-	rinp= rinp.slice(0,rinp.length-1);	
-	document.querySelector('#tb2').value= rinp;
-	if (rinp.length!=0){
-		st1= setTimeout(rloop,1000);
-	}
-}
-}
 
+        document.getElementById("tb2").value = document.getElementById("tb2").value.substr(0,document.getElementById("tb2").value.length-1);
+        if(document.getElementById("tb2").value.length == 0){
+            clearInterval(float);
+       }    }, 1000)
+});
+
+document.getElementById("bt2").addEventListener('click', function () {
+    clearInterval(float);
+     
+});
